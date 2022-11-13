@@ -1,8 +1,17 @@
 # LinkedElements
 
-LinkedElements is an angular library for link elements within a page (eg. sections, comments, articles, ect).
+LinkedElements is an angular library for link elements within a page (eg. sections, comments, articles, etc).
 
 ## Getting Started
+
+### Installation
+```bash
+npm install ngx-linked-elements
+yarn add ngx-linked-elements
+pnpm add ngx-linked-elements
+```
+
+### Example Usage
 
 Import the default module within your module
 
