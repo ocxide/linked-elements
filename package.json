@@ -5,6 +5,11 @@
   "author": {
     "name": "Jeshua Hinostroza"
   },
+  "keywords": ["angular", "ngx", "linked elements"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JekTheCoder/linked-elements"
+  },
   "peerDependencies": {
     "@angular/common": "^14.1.0",
     "@angular/core": "^14.1.0"
