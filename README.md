@@ -84,7 +84,9 @@ import { LinkedElementsService, LinkedElementsFragmentsRouterService } from 'ngx
     templateUrl: 'my-component.component.html',
     providers: [LinkedElementsService, LinkedElementsFragmentsRouterService]
 })
-export class MyComponent {}
+export class MyComponent {
+    constructor(..., private fragmentRouter: LinkedElementsFragmentsRouterService) {}
+}
 ```
 
 Now, each time that the fragment route changes, the document will scroll to the matched LinkedElement.
