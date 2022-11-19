@@ -86,17 +86,21 @@ You can have multiple links for the same linked element but just one linked elem
 
 You can define linked elements and scroll to them based on the route.
 
-First, you will have to provide the **FragmentRouterDirective** within your component.
+First, you will have to provide the **LinkedElementsRouterDirective** and a valid **RouteListener** directive strategy (eg: **FragmentListenerDirective**).
 
 **my-component.component.ts**
 
 ```ts
-import { LinkedElementsDirective, FragmentRouterDirective } from 'ngx-linked-elements';
+import { LinkedElementsDirective, LinkedElementsRouterDirective } from 'ngx-linked-elements';
 
 @Component({
     ...,
     templateUrl: 'my-component.component.html',
-    hostDirectives: [LinkedElementsDirective, FragmentRouterDirective]
+    hostDirectives: [
+			LinkedElementsDirective, 
+			LinkedElementsRouterDirective, 
+			FragmentListenerDirective
+		]
 })
 export class MyComponent {}
 ```
@@ -104,14 +108,11 @@ export class MyComponent {}
 Now, each time that the fragment route changes, the document will scroll to the matched LinkedElement.
 
 ```html
-<a routerLink="" fragment="section-1"
-	>I am a link to article-1<a>
-		<section ngxLinkedElement="section-1" style="height: 500px;margin-top: 100vh;">
-			<h3>Section 1</h3>
-			<p>...</p>
-		</section></a
-	></a
->
+<a routerLink="./" fragment="section-1">I am a link to article-1<a>
+<section ngxLinkedElement="section-1" style="height: 500px; margin-top: 100vh;">
+	<h3>Section 1</h3>
+	<p>...</p>
+</section>
 ```
 
 ## Advanced
@@ -144,11 +145,11 @@ import { MyComponent } from './my-component.component';
 @NgModule({
     ...
     imports: [
-      ...,
-			LinkedElementDirective,
-			LinkedElementsDirective,
-			LinkToDirective,
-      ...
+		...,
+		LinkedElementDirective,
+		LinkedElementsDirective,
+		LinkToDirective,
+		...
     ],
     providers: [
         ...,
