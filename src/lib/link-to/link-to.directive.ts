@@ -1,5 +1,5 @@
 import { Directive, HostListener, Input, OnInit } from '@angular/core';
-import { LinkedElementsDirective } from './linked-elements/linked-elements.directive';
+import { LinkedElementsDirective } from '../linked-elements/linked-elements.directive';
 
 const selector = 'ngxLinkTo';
 
