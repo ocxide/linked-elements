@@ -3,8 +3,8 @@
  */
 
 export * from './lib/link-to.directive';
+export * from './lib/linked-elements/linked-elements.directive';
 export * from './lib/linked-element.directive';
-export * from './lib/linked-elements.service';
 export * from './lib/linked-elements.module';
 
 export * from './lib/scroll-strategy/raw-scroll.strategy';

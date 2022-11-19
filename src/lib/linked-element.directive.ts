@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input, OnInit } from '@angular/core';
-import { LinkedElementsService } from './linked-elements.service';
+import { LinkedElementsService } from './linked-elements/linked-elements.service';
 
 const selector = 'ngxLinkedElement';
 

@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, Subject, takeUntil, tap } from 'rxjs';
-import { LinkedElementsService } from './linked-elements.service';
+import { LinkedElementsDirective } from './linked-elements/linked-elements.directive';
 
 @Injectable({
 	providedIn: 'root',
@@ -13,7 +13,7 @@ export class LinkedElementsFragmentRouterService implements OnDestroy, OnInit {
 	constructor(
     private route: ActivatedRoute,
     private router: Router,
-		private linkedElements: LinkedElementsService
+		private linkedElements: LinkedElementsDirective
 	) {}
 
 	ngOnInit(): void {

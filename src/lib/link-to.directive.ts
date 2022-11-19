@@ -1,5 +1,5 @@
 import { Directive, HostListener, Input, OnInit } from '@angular/core';
-import { LinkedElementsService } from './linked-elements.service';
+import { LinkedElementsDirective } from './linked-elements/linked-elements.directive';
 
 const selector = 'ngxLinkTo';
 
@@ -11,7 +11,7 @@ export class LinkToDirective implements OnInit {
 
   @Input(selector) name!: string;
 
-  constructor(private linkedElements: LinkedElementsService) { }
+  constructor(private linkedElements: LinkedElementsDirective) { }
 
   ngOnInit(): void {
     if (!this.name) throw new Error('Name not provided');
