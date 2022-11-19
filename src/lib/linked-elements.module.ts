@@ -11,15 +11,15 @@ const directives = [
 	LinkedElementDirective,
 	LinkToDirective,
 	LinkedElementsDirective,
-	FragmentRouterDirective
+	FragmentRouterDirective,
 ];
 
 @NgModule({
-  imports: directives,
-  exports: directives,
-  providers: [
-    { provide: PrimaryScrollStrategy, useClass: SmoothScrollStrategy },
-    { provide: SecondaryScrollStrategy, useClass: RawScrollStrategy }
-  ]
+	imports: directives,
+	exports: directives,
+	providers: [
+		{ provide: PrimaryScrollStrategy, useClass: SmoothScrollStrategy },
+		{ provide: SecondaryScrollStrategy, useClass: RawScrollStrategy },
+	],
 })
-export class LinkedElementsModule { }
+export class LinkedElementsModule {}
