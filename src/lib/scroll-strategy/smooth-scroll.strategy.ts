@@ -1,11 +1,11 @@
-import { Injectable } from "@angular/core";
-import { BaseScrollStrategy } from "./base-scroll-strategy";
+import { Injectable } from '@angular/core';
+import { BaseScrollStrategy } from './base-scroll-strategy';
 
-@Injectable({
-    providedIn: "root"
-})
+@Injectable()
 export class SmoothScrollStrategy implements BaseScrollStrategy {
-    scrollIntoView(element: HTMLElement): void {
-        element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
-    }
+	constructor() {}
+
+	scrollIntoView(element: HTMLElement): void {
+		element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+	}
 }
