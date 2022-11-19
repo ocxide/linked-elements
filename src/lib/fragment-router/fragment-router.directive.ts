@@ -13,10 +13,10 @@ export class FragmentRouterDirective {
 	private checkChanges = true;
 
 	@HostObservable()
-	route$?: Observable<string | null>;
+		route$?: Observable<string | null>;
 
 	@HostObservable()
-	element$?: Observable<string | null>;
+		element$?: Observable<string | null>;
 
 	constructor(
 		private route: ActivatedRoute,
