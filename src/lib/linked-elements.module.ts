@@ -4,14 +4,17 @@ import { SmoothScrollStrategy } from './scroll-strategy/smooth-scroll.strategy';
 import { PrimaryScrollStrategy, SecondaryScrollStrategy } from './scroll-strategy/tokens';
 import { LinkToDirective } from './link-to/link-to.directive';
 import { RawScrollStrategy } from './scroll-strategy/raw-scroll.strategy';
-import { FragmentRouterDirective } from './fragment-router/fragment-router.directive';
 import { LinkedElementsDirective } from './linked-elements/linked-elements.directive';
+import { LinkedElementsRouterDirective } from './linked-elements-router/linked-elements-router.directive';
+import { FragmentListenerDirective } from './linked-elements-router/fragment-listener.directive';
+import { BaseRouteListener } from './linked-elements-router';
 
 const directives = [
 	LinkedElementDirective,
 	LinkToDirective,
 	LinkedElementsDirective,
-	FragmentRouterDirective,
+	LinkedElementsRouterDirective,
+	FragmentListenerDirective,
 ];
 
 @NgModule({
@@ -20,6 +23,9 @@ const directives = [
 	providers: [
 		{ provide: PrimaryScrollStrategy, useClass: SmoothScrollStrategy },
 		{ provide: SecondaryScrollStrategy, useClass: RawScrollStrategy },
+		{ provide: BaseRouteListener, useClass: FragmentListenerDirective },
+	],
+	declarations: [
 	],
 })
 export class LinkedElementsModule {}

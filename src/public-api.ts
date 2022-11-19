@@ -8,5 +8,4 @@ export * from './lib/linked-element/linked-element.directive';
 export * from './lib/linked-elements.module';
 
 export * from './lib/scroll-strategy';
-
-export * from './lib/fragment-router/fragment-router.directive';
+export * from './lib/linked-elements-router';
