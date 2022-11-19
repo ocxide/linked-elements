@@ -1,22 +1,20 @@
-import { Directive } from '@angular/core';
+import { AfterViewInit, Directive, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LinkedElementsDirective } from '../linked-elements/linked-elements.directive';
 
-import { Observable, filter, tap } from 'rxjs';
+import { Observable, filter, tap, skip, distinctUntilChanged } from 'rxjs';
 import { HostObservable } from 'ngx-host-observable';
 
 @Directive({
 	selector: '[ngxFragmentRouter]',
 	standalone: true,
 })
-export class FragmentRouterDirective {
-	private checkChanges = true;
+export class FragmentRouterDirective implements OnInit, AfterViewInit {
+	@HostObservable()
+	route$?: Observable<string | null>;
 
 	@HostObservable()
-		route$?: Observable<string | null>;
-
-	@HostObservable()
-		element$?: Observable<string | null>;
+	element$?: Observable<string | null>;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -25,21 +23,24 @@ export class FragmentRouterDirective {
 	) {}
 
 	ngOnInit(): void {
-		const fragment = this.route.snapshot.fragment;
-		if (fragment) this.linkedElements.rawScroll(fragment);
-
 		this.route$ = this.route.fragment.pipe(
+			skip(1),
 			filter(Boolean),
 			tap(fragment => this.onRouteChanges(fragment))
 		);
 
 		this.element$ = this.linkedElements.linkedElementChanges.pipe(
+			distinctUntilChanged(),
 			tap(element => this.onElementChanges(element))
 		);
 	}
 
+	ngAfterViewInit(): void {
+		const fragment = this.route.snapshot.fragment;
+		if (fragment) this.linkedElements.rawScroll(fragment);
+	}
+
 	private onElementChanges(element: string) {
-		this.checkChanges = false;
 		this.router.navigate(['./'], {
 			relativeTo: this.route,
 			fragment: element,
@@ -47,11 +48,6 @@ export class FragmentRouterDirective {
 	}
 
 	private onRouteChanges(fragment: string) {
-		const checkChanges = this.checkChanges;
-		this.checkChanges = true;
-
-		if (!checkChanges) return;
-
 		this.linkedElements.scroll(fragment);
 	}
 }
