@@ -11,7 +11,7 @@ import {
 	standalone: true,
 })
 export class LinkedElementsDirective {
-	@Output() linkedElementChanges = new EventEmitter<string>();
+	@Output() linkedElementChanges = new EventEmitter<string | null>();
 
 	private elements = new Map<string, HTMLElement>();
 	constructor(
@@ -29,15 +29,29 @@ export class LinkedElementsDirective {
 		return this.elements.get(key);
 	}
 
-	scroll(key: string) {
+	scroll(key: string | null) {
+		if (key == null) {
+			this.scrollStrategy.scrollTop();
+			this.linkedElementChanges.emit(key);
+			return;
+		}
+		
 		const element = this.elements.get(key);
 		if (!element) return console.warn(`Element with name '${key}' not found`);
-
 		this.linkedElementChanges.emit(key);
+		
 		this.scrollStrategy.scrollIntoView(element);
 	}
 
-	rawScroll(key: string) {
+	rawScroll(key: string | null) {
+		if (key == null) {
+			this.secondaryScrollStrategy.scrollTop();
+			console.log('top');
+			
+			this.linkedElementChanges.emit(key);
+			return;
+		}
+
 		const element = this.elements.get(key);
 		if (!element) return console.warn(`Element with name '${key}' not found`);
 

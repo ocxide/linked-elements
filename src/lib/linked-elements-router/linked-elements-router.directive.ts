@@ -1,8 +1,9 @@
 import { AfterViewInit, Directive } from '@angular/core';
 import { LinkedElementsDirective } from '../linked-elements/linked-elements.directive';
 import { BaseRouteListener } from './base-route-listener';
-import { first, filter, Observable, skip, map } from 'rxjs';
+import { first, Observable, skip, map } from 'rxjs';
 import { HostObservable } from 'ngx-host-observable';
+import { nullify } from '../rxjs-pipes/nullify';
 
 @Directive({
 	selector: '[ngxLinkedElementsRouter]',
@@ -23,8 +24,13 @@ export class LinkedElementsRouterDirective implements AfterViewInit {
 	ngAfterViewInit(): void {
 		const route$ = this.routeListener.getRoute();
 		route$
-			.pipe(first(), filter(Boolean))
-			.subscribe(path => this.linkedElements.rawScroll(path));
+			.pipe(
+				first(),
+				nullify()
+			)
+			.subscribe(path => {
+				this.linkedElements.rawScroll(path);
+			});
 
 		this.elements$ = this.linkedElements.linkedElementChanges.pipe(
 			map(path => this.routeListener.setRoute(path))
@@ -32,7 +38,7 @@ export class LinkedElementsRouterDirective implements AfterViewInit {
 
 		this.path$ = route$.pipe(
 			skip(1),
-			filter(Boolean),
+			nullify(),
 			map(path => this.linkedElements.scroll(path))
 		);
 	}

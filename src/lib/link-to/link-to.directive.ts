@@ -8,7 +8,7 @@ const selector = 'ngxLinkTo';
 	standalone: true,
 })
 export class LinkToDirective implements OnInit {
-	@Input(selector) name!: string;
+	@Input(selector) name!: string | null;
 
 	constructor(private linkedElements: LinkedElementsDirective) {}
 
